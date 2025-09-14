@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Task Manager</title>
+{% endblock %}
+
+ {% block body %}
+    <div class="content">
+       <h1>📑Task Manager</h1>
+      <table>
+        <tr>
+          <th>Task</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          {% for task in tasks %}
+          <td>{{ task.content }}</td>
+          <td>{{ task.date_created }}</td>
+          <td>
+            <form action="/update/{{ task.id }}">
+              <button type="submit" class="btn-update">Update</button>
+            </form>
+            <form action="/delete/{{ task.id }}">
+              <button type="submit" class="btn-delete">Delete</button>
+            </form>
+
+          </td>
+        </tr>
+        {% endfor %}
+
+      </table>
+      <form action="/" method="POST">
+        <input type="text", name="content", id="content">
+        <input type="submit" value="Add Task">
+      </form>
+
+    </div>
+ {% endblock %}
